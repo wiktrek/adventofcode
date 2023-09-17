@@ -1,5 +1,5 @@
 fn main() {
-    let file = std::fs::read_to_string("./input.txt").unwrap();
+    let file = std::fs::read_to_string("../input.txt").unwrap();
     let mut data: Vec<i32> = vec![];
     let lines = file.lines();
     for line in lines {
