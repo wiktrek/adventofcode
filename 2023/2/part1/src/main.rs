@@ -1,4 +1,8 @@
+/*
+    It works but I don't recommend using this
+*/
 use std::fs::read_to_string;
+
 #[derive(Debug)]
 struct Cubes {
     red: i32,
