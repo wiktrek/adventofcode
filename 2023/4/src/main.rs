@@ -1,4 +1,4 @@
-use std::fs::read_to_string;
+use std::{borrow::Borrow, fs::read_to_string, str::Lines};
 
 fn main() {
     println!("Day 4");
@@ -33,4 +33,10 @@ fn part1() {
     }
     println!("{}", sum)
 }
-fn part2() {}
+fn part2() {
+    let file = read_to_string("input.txt").unwrap();
+    let lines = file.lines();
+    let mut scratchcards = 0;
+
+    println!("Part 2 ");
+}
