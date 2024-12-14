@@ -9,30 +9,35 @@ import (
 )
 
 func main() {
-    content, err := os.ReadFile("./2024/day2/1/input.txt")
+    content, err := os.ReadFile("./2024/day2/input.txt")
 	if err != nil {
         log.Fatal(err)
     }
     rows := strings.Split(string(content), "\r\n")
 	levels := [1000][10]string{}
 	for i,row := range rows {
-		println(row)
+		// println(row)
 		d := strings.Split(row, " ")
-  		levels[i] = [10]string(d)
+		copy(levels[i][:], d[:])
 		if err != nil {
    	 	    log.Fatal(err)
   	 	}
     }
 	safe := 0
 	for _,l := range levels {
-		safe_l := false
+		if check_correct(l) {
+			safe++
+		}
+	}
+	fmt.Printf("%d", safe)
+}
+func check_correct(l [10]string) bool {
+	safe_l := false
+		decreasing := false
 		for j,vs := range l {
-			v, err := strconv.Atoi(vs)
-			next, err := strconv.Atoi(l[j +1])
-			if err	!= nil {
-                log.Fatal(err)
-           }
-			decreasing := false
+			v := convert(vs)
+			next := convert(l[j+1])
+		   
 				if j == 0 {
 					if v < next {
 						decreasing = false
@@ -48,19 +53,19 @@ func main() {
 				} else if decreasing == false && 0 < next - v && next - v <= 3 {
 					safe_l = true
 				} else {
-					fmt.Printf("%v", l)
-					fmt.Println(decreasing)
 					safe_l = false
+					break
 				}
         }
-		if safe_l == true {
-			// fmt.Printf("%v\n",l)
-			safe++
-        }
-		//  else if safe_l == false{
-		// 	fmt.Printf("%v\n",l)
-		// }
-	}
-	fmt.Printf("%d", safe)
+		return safe_l
 }
-
+func convert(str string) int {
+           if str == "" {
+               return 0
+           }
+			v, err := strconv.Atoi(str)
+			if err	!= nil {
+                log.Fatal(err)
+           }	
+		   return v
+} 
