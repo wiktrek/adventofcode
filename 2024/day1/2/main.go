@@ -1,10 +1,10 @@
+// Its slow but works
 package main
 
 import (
 	"fmt"
 	"log"
 	"os"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -26,16 +26,16 @@ func main() {
    	 	    log.Fatal(err)
   	 	}
     }
-	sort.Ints(distance[:])
-	sort.Ints(distance2[:])
-	sum := 0;
-	for i := 0; i < 1000; i++ {
-		if distance[i] > distance2[i] {
-			sum += distance[i] - distance2[i]
-		} else {
-			sum += distance2[i] - distance[i]
+	sum := 0
+	for _,value := range distance {
+		i := 0
+		for _, v := range distance2 {
+			if value == v {
+					i += 1
+			}
 		}
-	} 
-	fmt.Println(sum)
+		sum += value * i
+	}
+	fmt.Printf("%d", sum)
 }
 
