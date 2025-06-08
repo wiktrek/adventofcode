@@ -37,6 +37,19 @@ func part1(input string) {
 }
 
 func part2(input string) {
-
+	lines:= strings.Split(input, "\n")
+	sum := 0
+	for i:=0;i<len(lines);i++ {
+		numbers:= strings.Split(lines[i], "x")
+		a, err:= strconv.Atoi(numbers[0])
+		check(err)
+		b,err:= strconv.Atoi(numbers[1])
+		check(err)
+		c,err:= strconv.Atoi(numbers[2])
+		check(err)
+		fmt.Println(a,b,c, a*b*c, a*b*c+2*a+2*b+2*c-max(2*a,2*b,2*c))
+		sum += a*b*c+2*a+2*b+2*c-max(2*a,2*b,2*c)
+	}
+	fmt.Println(sum)
 }
 
