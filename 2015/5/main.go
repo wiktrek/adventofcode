@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"regexp"
 	"strings"
@@ -48,12 +49,41 @@ func part1(input string) {
 			nice_strings++
 		}
 	}
-	print(nice_strings)
+	println(nice_strings)
 }
 
 func part2(input string) {
-	// lines:= strings.Split(input, "\n")
-
+	lines := strings.Split(input, "\n")
+	nice_strings := 0
+	for i := range lines  {
+		a:= false
+		for j:=0;j<len(lines[i])-2;j++ {
+			if lines[i][j] == lines[i][j+2] {
+				a = true
+				break
+			}
+		}
+		if !a {
+			continue
+		}
+		b:=false;
+		for j:=0;j<len(lines[i])-1;j++ {
+			two_chars:= fmt.Sprintf("%c%c",lines[i][j], lines[i][j+1])
+			for k:=j+2;k<len(lines[i])-1;k++ {
+				two_chars2 := fmt.Sprintf("%c%c",lines[i][k], lines[i][k+1])
+				if two_chars == two_chars2 {
+					b = true
+					break
+				}
+			}
+		}
+		if !b {
+			continue
+		}
+		nice_strings++
+	}
+	
+	println(nice_strings)
 }
 
 
